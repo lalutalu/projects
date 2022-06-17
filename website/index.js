@@ -2,6 +2,8 @@
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 
+console.log(collisions);
+
 // size of canvas
 canvas.width = 1024;
 canvas.height = 576;
@@ -20,13 +22,12 @@ playerImage.src = "./img/playerDown.png";
 class Sprite {
   constructor({ position, velocity, image }) {
     this.position = position;
-    this.image = image
+    this.image = image;
   }
 
   draw() {
     // Make background and player appear centered on screen
-    c.drawImage(this.image, this.position.x, this.position.y
-   );
+    c.drawImage(this.image, this.position.x, this.position.y);
   }
 }
 
@@ -35,27 +36,27 @@ const background = new Sprite({
     x: -742,
     y: -600,
   },
-    image: image
+  image: image,
 });
 
 const keys = {
-    w: {
-        pressed: false
-    },
-    a: {
-        pressed: false
-    },
-    s: {
-        pressed: false
-    },
-    d: {
-        pressed: false
-    }
-}
+  w: {
+    pressed: false,
+  },
+  a: {
+    pressed: false,
+  },
+  s: {
+    pressed: false,
+  },
+  d: {
+    pressed: false,
+  },
+};
 
 function animate() {
   window.requestAnimationFrame(animate);
-    background.draw()
+  background.draw();
 
   c.drawImage(
     // cropping
@@ -69,37 +70,42 @@ function animate() {
     canvas.height / 2 - playerImage.height / 2,
     playerImage.width / 4,
     playerImage.height
-  )
-    
-    if (keys.w.pressed && lastKey === 'w') background.position.y += 3,
- elseif (keys.a.pressed && lastKey === 'a'); background.position.x += 3,
- elseif (keys.s.pressed && lastKey   === 's'); background.position.y -= 3,
- elseif (keys.d.pressed && lastKey === 'd');  background.position.x -= 3
-};
+  );
+
+  if (keys.w.pressed && lastKey === "w") {
+    background.position.y += 3;
+  } else if (keys.a.pressed && lastKey === "a") {
+    background.position.x += 3;
+  } else if (keys.s.pressed && lastKey === "s") {
+    background.position.y -= 3;
+  } else if (keys.d.pressed && lastKey === "d") {
+    background.position.x -= 3;
+  }
+}
 animate();
 
-let lastKey = ''
+let lastKey = "";
 
 window.addEventListener("keydown", (e) => {
   switch (e.key) {
     case "w":
       keys.w.pressed = true;
-          lastKey = 'w'
+      lastKey = "w";
       break;
     case "a":
       keys.a.pressed = true;
-          lastKey = 'a'
+      lastKey = "a";
       break;
     case "s":
       keys.s.pressed = true;
-          lastKey = 's'
+      lastKey = "s";
       break;
     case "d":
       keys.d.pressed = true;
-          lastKey = 'd'
+      lastKey = "d";
       break;
   }
-    console.log(keys)
+  console.log(keys);
 });
 
 window.addEventListener("keyup", (e) => {
@@ -117,5 +123,5 @@ window.addEventListener("keyup", (e) => {
       keys.d.pressed = false;
       break;
   }
-    console.log(keys)
+  console.log(keys);
 });
